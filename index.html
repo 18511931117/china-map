@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+  <title>ECharts China Map</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body{
+      height: 100%;
+    }
+    #china-map {
+      width: 50%;
+      height: 100%;
+      float: left;
+    }
+    #box{
+        display:none;
+        background-color: goldenrod;
+        width: 180px;
+        height: 30px;
+    }
+    #Polyline{
+      width: 50%;
+      height: 100%;
+      float: left;
+    }
+    #box-title{
+        display:block;
+    }
+  </style>
+  <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
+  <script type="text/javascript" src="./js/map/china.js"></script>
+</head>
+
+<body>
+  <div id="china-map"></div>
+  <div id="Polyline"></div>
+  <script>
+
+chinaMap()
+Polyline()
+
+function Polyline(){
+        var Polyline = echarts.init(document.getElementById('Polyline'));
+
+//         option = {
+//     backgroundColor: '#11183c',
+//     tooltip: {
+//         trigger: 'axis',
+//         axisPointer: {
+//             type: 'shadow'
+//         }
+//     },
+//     grid: {
+//         top: '15%',
+//         right: '3%',
+//         left: '15%',
+//         bottom: '12%'
+//     },
+//     xAxis: [{
+//         type: 'value',
+//          axisLabel: {
+//             formatter: '{value}',
+//             color: '#e2e9ff',
+//         },
+//         axisLine: {
+//             show: true
+//         },
+//         splitLine: {
+//             lineStyle: {
+//                 color: 'rgba(255,255,255,0.12)'
+//             }
+//         }
+//     }],
+//     yAxis: [{
+//         type:'category',
+//         max:20,
+//         data: ['商品详情', '资讯详情', '邀请好友', 'NFC鉴定结果', '二维码扫描结果',],
+//         axisLine: {
+//             lineStyle: {
+//                 color: 'rgba(255,255,255,0.12)'
+//             }
+//         },
+//         axisLabel: {
+
+//             color: '#e2e9ff',
+//             textStyle: {
+//                 fontSize: 14
+//             },
+//         },
+//     }],
+//     series: [{
+//         type: 'bar',
+//         data: [300, 450, 20, 203, 255,],
+//         barWidth: '20px',
+//         itemStyle: {
+//             normal: {
+//                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+//                     offset: 0,
+//                     color: 'rgba(0,244,255,1)' // 0% 处的颜色
+//                 }, {
+//                     offset: 1,
+//                     color: 'rgba(0,77,167,1)' // 100% 处的颜色
+//                 }], false),
+//                 barBorderRadius: [30, 30, 30, 30],
+//                 shadowColor: 'rgba(0,160,221,1)',
+//                 shadowBlur: 4,
+//             }
+//         },
+        
+//     }]
+    
+// };
+
+var option = {
+    backgroundColor: '#11183c',
+    //  title:{
+    //      text:'综合风险指数排名',
+    //      x: '2%', 
+    //      y: '8%',
+    //      textStyle:{color:"#fff",fontSize:"20"}},
+     tooltip: {
+         trigger: 'axis'
+     },
+     textStyle: {
+         color: '#32cbd7',
+         fontSize: '10px'
+     },
+     grid: {
+         left: '3%',
+         right: '8%',
+         bottom: '3%',
+         top: '15%',
+         containLabel: true
+     },
+     calculable: true,
+     yAxis: [{
+         data: [
+             
+             "上海",
+             "海南",
+             "广西",
+             "广东",
+             "云南",
+             "贵州",
+             "湖南",
+             "江西",
+             "福建",
+             "浙江",
+             "湖北",
+             "安徽",
+             "江苏",
+             "河南",
+             "山东",
+             "重庆",
+             "四川",
+             "西藏",
+             "新疆",
+             "青海",
+             "宁夏",
+             "甘肃",
+             "山西",
+             "陕西",
+             "天津",
+             "河北",
+             "辽宁",
+             "北京",
+             "吉林",
+             "内蒙古",
+             "黑龙江",
+             "台湾",
+         ],
+         axisLine: {
+             lineStyle: {
+                 color: 'rgb(20,203,215,0.2)'
+             }
+         },
+         //刻度线是否显示
+         axisTick: {
+             show: false
+         },
+         axisLabel: {
+             interval: 0,
+             show: true
+         },
+         splitLine: {
+             show: false,
+             lineStyle: {
+                 // 使用深浅的间隔色
+                 color: 'rgb(20,203,215,0.2)'
+             }
+         }
+         
+     }],
+     xAxis: [{
+         type: 'value',
+         name: '',
+         axisLine: {
+             show: false,
+             symbolOffset: [0, 10],
+             lineStyle: {
+                 color: 'rgb(20,203,215,0.2)'
+             }
+         },
+         axisTick: {
+             show: true,
+         },
+         splitLine: {
+             show: true,
+             lineStyle: {
+                 color: 'rgb(20,203,215,0.2)'
+             }
+         },
+     
+     }],
+     series: [{
+         name: '分享次数',
+         barWidth: '10px',
+         type: 'bar',
+         barGap: '5%',
+         barCategoryGap: '20%',
+         itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(0,244,255,1)' // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: 'rgba(0,77,167,1)' // 100% 处的颜色
+                }], false),
+                barBorderRadius: [30, 30, 30, 30],
+                shadowColor: 'rgba(0,160,221,1)',
+                shadowBlur: 4,
+            }
+        },
+         data: [
+             99,
+             95,
+             85,
+             79,
+             73,
+             68,
+             61,
+             57,
+             155,
+             47,
+             41,
+             34,
+             30,
+             22,
+             19,
+             10,
+             99,
+             95,
+             85,
+             79,
+             73,
+             68,
+             61,
+             57,
+             50,
+             47,
+             41,
+             34,
+             30,
+             22,
+             19,
+             10,
+             
+         ],
+         zlevel: 11
+     }]
+
+ }
+
+            Polyline.setOption(option);
+            window.addEventListener("resize",()=>{
+                Polyline.resize();
+            });
+
+    }
+
+  function chinaMap(){
+    var myChart = echarts.init(document.getElementById('china-map'));
+
+    
+
+    var seriesData = [{
+      name: '北京',
+      value: 100
+    }, {
+      name: '天津',
+      value: 0
+    }, {
+      name: '上海',
+      value: 60
+    }, {
+      name: '重庆',
+      value: 0
+    }, {
+      name: '河北',
+      value: 60
+    }, {
+      name: '河南',
+      value: 60
+    }, {
+      name: '云南',
+      value: 0
+    }, {
+      name: '辽宁',
+      value: 0
+    }, {
+      name: '黑龙江',
+      value: 0
+    }, {
+      name: '湖南',
+      value: 60
+    }, {
+      name: '安徽',
+      value: 0
+    }, {
+      name: '山东',
+      value: 60
+    }, {
+      name: '新疆',
+      value: 0
+    }, {
+      name: '江苏',
+      value: 0
+    }, {
+      name: '浙江',
+      value: 0
+    }, {
+      name: '江西',
+      value: 0
+    }, {
+      name: '湖北',
+      value: 60
+    }, {
+      name: '广西',
+      value: 60
+    }, {
+      name: '甘肃',
+      value: 0
+    }, {
+      name: '山西',
+      value: 60
+    }, {
+      name: '内蒙古',
+      value: 0
+    }, {
+      name: '陕西',
+      value: 0
+    }, {
+      name: '吉林',
+      value: 0
+    }, {
+      name: '福建',
+      value: 0
+    }, {
+      name: '贵州',
+      value: 0
+    }, {
+      name: '广东',
+      value: 597
+    }, {
+      name: '青海',
+      value: 0
+    }, {
+      name: '西藏',
+      value: 0
+    }, {
+      name: '四川',
+      value: 60
+    }, {
+      name: '宁夏',
+      value: 0
+    }, {
+      name: '海南',
+      value: 60
+    }, {
+      name: '台湾',
+      value: 0
+    }, {
+      name: '香港',
+      value: 0
+    }, {
+      name: '澳门',
+      value: 0
+    }];
+
+
+
+    initEcharts("china", "中国地图");
+
+    // 初始化echarts
+    function initEcharts(pName, Chinese_) {
+      var tmpSeriesData = pName === "china" ? seriesData : [];
+
+      var option = {
+        backgroundColor:'#11183c',
+        title: {
+          text: Chinese_ || pName,
+          left: 'center',
+          top:'15%',
+          textStyle:{
+            color:'#fff'
+          }
+        },
+          tooltip: {
+              trigger: 'item',
+              formatter: '{b}<br/>{c} (信息)',  
+          },
+        series: [
+          {
+            name: Chinese_ || pName,
+            type: 'map',
+            mapType: pName,
+            roam: false,//是否开启鼠标缩放和平移漫游
+            data: tmpSeriesData,
+            top: "center",//组件距离容器的距离
+              zoom:1.1,
+              selectedMode : 'single',
+
+              label: {
+                  normal: {
+                      show: true,//显示省份标签
+                      textStyle:{color:"#fbfdfe"}//省份标签字体颜色
+                  },
+                  emphasis: {//对应的鼠标悬浮效果
+                      show: true,
+                      textStyle:{color:"#323232"}
+                  }
+              },
+              itemStyle: {
+                normal: {
+                    // areaColor: '#264CAC',
+                    areaColor: {
+                        type: 'radial',
+                        x: 0.5,
+                        y: 0.5,
+                        r: 0.8,
+                        colorStops: [{
+                            offset: 0,
+                            color: 'rgba(23,97,159, 1)' // 0% 处的颜色
+                        }, {
+                            offset: 1,
+                            color: 'rgba(41,153,190, 1)' // 100% 处的颜色
+                        }],
+                        globalCoord: false // 缺省为 false
+                    },
+                    borderColor: '#6FB2EF',
+                    borderWidth: 1,
+                    label: {
+                        show: false,
+                        color: '#fff',
+                        fontSize: '16'
+                    },
+                    emphasis: {
+                        label: {
+                            show: false
+                        }
+                    }
+                }
+            },
+          }
+        ]
+
+           };
+
+      myChart.setOption(option);
+      window.addEventListener("resize",()=>{
+        myChart.resize();
+            });
+
+    }
+  }
+  </script>
+</body>
+
+</html>
